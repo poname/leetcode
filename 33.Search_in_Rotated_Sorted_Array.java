@@ -31,26 +31,4 @@ class Solution {
             return mid;
         }
     }
-    // int bst(int[] nums, int start, int end, int target) {
-    //     if (start > end) {
-    //         return -1;
-    //     }
-    //     int mid = (start+end)/2;
-    //     if (nums[mid] == target) {
-    //         return mid;
-    //     }
-    //     if (nums[start] > nums[end]) {
-    //         if (nums[mid] > target) {
-
-    //         } else {
-
-    //         }
-    //     } else {
-    //         if (nums[mid] > target) {
-    //             return bst(nums, start, mid-1, target);
-    //         } else {
-    //             return bst(nums, mid+1, end, target);
-    //         }
-    //     }
-    // }
 }
