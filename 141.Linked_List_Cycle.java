@@ -14,3 +14,16 @@ public class Solution {
         return false;
     }
 }
+
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        Set<ListNode> set = new HashSet<>();
+        for (ListNode curr=head; curr!=null; curr=curr.next) {
+            if (set.contains(curr)) {
+                return true;
+            }
+            set.add(curr);
+        }
+        return false;
+    }
+}
