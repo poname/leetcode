@@ -1,6 +1,34 @@
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<> ();
+        if (root != null) {
+            queue.add(root);
+        }
+        
+        while (queue.size() > 0) {
+            List<Integer> level = new ArrayList<>();
+            final int num = queue.size();
+            for (int i=0; i<num; i++) {
+                TreeNode node = queue.remove();
+                level.add(node.val);
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+            }
+            res.add(level);
+        }
+
+        return res;
+    }
+}
+
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
         rec(root, 1, res);
         return res;
     }
