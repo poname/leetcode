@@ -1,3 +1,4 @@
+// O(mn * 4^(mn))
 class Solution {
     public List<String> findWords(char[][] board, String[] words) {
         Trie trie = new Trie();
@@ -5,9 +6,9 @@ class Solution {
             trie.add(word);
         }
         Set<String> set = new HashSet<>();
-        for (int r=0; r<board.length; r++) {
-            for (int c=0; c<board[0].length; c++) {
-                dfs(r, c, trie.head, set, board, new boolean[board.length][board[0].length]);
+        for (int r=0; r<board.length; r++) { // O(m)
+            for (int c=0; c<board[0].length; c++) { // O(n)
+                dfs(r, c, trie.head, set, board, new boolean[board.length][board[0].length]); // O(4^(mn))
             }
         }
         List<String> res = new ArrayList<>();
