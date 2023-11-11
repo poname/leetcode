@@ -7,6 +7,52 @@ public class Solution {
     public int countComponents(int n, int[][] edges) {
         // write your code here
         int[] parent = new int[n];
+        int[] rank = new int[n];
+        for (int i=0; i<n; i++) {
+            parent[i] = i;
+            rank[i] = 1;
+        }
+        int comp = n;
+        for (int[] e : edges) {
+            int a = e[0];
+            int b = e[1];
+
+            while (a != parent[a]) {
+                parent[a] = parent[parent[a]];
+                a = parent[a];
+            }
+
+            while (b != parent[b]) {
+                parent[b] = parent[parent[b]];
+                b = parent[b];
+            }
+
+            if (a != b) {
+                if (rank[a] > rank[b]) {
+                    parent[b] = a;
+                    rank[a] += rank[b];
+                } else {
+                    parent[a] = b;
+                    rank[b] += rank[a];
+                }  
+                comp--;
+            }
+            
+        }
+
+        return comp;
+    }
+}
+
+public class Solution {
+    /**
+     * @param n: the number of vertices
+     * @param edges: the edges of undirected graph
+     * @return: the number of connected components
+     */
+    public int countComponents(int n, int[][] edges) {
+        // write your code here
+        int[] parent = new int[n];
         for (int i=0; i<n; i++) {
             parent[i] = i;
         }
