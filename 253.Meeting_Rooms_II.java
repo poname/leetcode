@@ -19,7 +19,7 @@ public class Solution {
             return 0;
         }
         // Write your code here
-        Map<Integer, Integer> map = new TreeMap<>();
+        Map<Integer, Integer> map = new TreeMap<>(); // to keep the keys sorted ASC
         for (Interval iv : intervals) {
             map.putIfAbsent(iv.start, 0);
             map.computeIfPresent(iv.start, (k,v) -> v+1);
