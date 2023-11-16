@@ -1,3 +1,41 @@
+public class Codec {
+
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        List<String> values = new ArrayList<>();
+        sdfs(root, values);
+        return String.join(",", values);
+    }
+
+    private void sdfs(TreeNode root, List<String> values) {
+        if (root == null) {
+            values.add("N");
+        } else {
+            values.add(String.valueOf(root.val));
+            sdfs(root.left, values);
+            sdfs(root.right, values);
+        }
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        String[] values = data.split(",");
+        return ddfs(new int[]{0}, values);
+    }
+
+    private TreeNode ddfs(int[] i, String[] data) {
+        if (data[i[0]].equals("N")) {
+            i[0]++;
+            return null;
+        }
+        TreeNode root = new TreeNode(Integer.valueOf(data[i[0]]));
+        i[0]++;
+        root.left = ddfs(i, data);
+        root.right = ddfs(i, data);
+        return root;
+    }
+}
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
