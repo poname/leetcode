@@ -5,6 +5,27 @@ class Solution {
         for (char c : s1.toCharArray()) {
             need[c-'a']++;
         }
+        char[] in = s2.toCharArray();
+        for (int i=0; i<in.length; i++) {
+            have[in[i]-'a']++;
+            if (i >= s1.length()) {
+                have[in[i-s1.length()]-'a']--;
+            }
+            if (Arrays.equals(need, have)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        int[] need = new int[26];
+        int[] have = new int[26];
+        for (char c : s1.toCharArray()) {
+            need[c-'a']++;
+        }
         int l=0;
         char[] in = s2.toCharArray();
         for (int r=0; r<in.length; r++) {
