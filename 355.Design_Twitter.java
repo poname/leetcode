@@ -2,6 +2,56 @@ class Twitter {
 
     int time;
     Map<Integer, List<int[]>> tweets; // userId -> Tweet [0]:tweetId, [1] : time
+    Map<Integer, Set<Integer>> following; // follower -> followees
+
+    public Twitter() {
+        tweets = new HashMap<>();
+        following = new HashMap<>();
+        time = 0;
+    }
+    
+    public void postTweet(int userId, int tweetId) {
+        following.putIfAbsent(userId, new HashSet<>(Arrays.asList(userId)));
+        int[] t = new int[]{tweetId, time++};
+        tweets.putIfAbsent(userId, new ArrayList<>());
+        tweets.get(userId).add(t);
+    }
+    
+    public List<Integer> getNewsFeed(int userId) {
+        if (!following.containsKey(userId)) {
+            return Collections.emptyList();
+        }
+        List<int[]> feeds = new ArrayList<>();
+        for (int followee : following.get(userId)) {
+            if (tweets.containsKey(followee)) {
+                feeds.addAll(tweets.get(followee));
+            }
+        }
+        Collections.sort(feeds, (x,y) -> Integer.compare(y[1], x[1]));
+        List<Integer> res = new ArrayList<>();
+        for (int i=0; i<Math.min(10, feeds.size()); i++) {
+            res.add(feeds.get(i)[0]);
+        }
+        return res;
+    }
+    
+    public void follow(int followerId, int followeeId) {
+        following.putIfAbsent(followerId, new HashSet<>(Arrays.asList(followerId)));
+        following.get(followerId).add(followeeId);
+    }
+    
+    public void unfollow(int followerId, int followeeId) {
+        if (following.containsKey(followerId)) {
+            following.get(followerId).remove(followeeId);
+        }
+    }
+
+}
+
+class Twitter {
+
+    int time;
+    Map<Integer, List<int[]>> tweets; // userId -> Tweet [0]:tweetId, [1] : time
     Map<Integer, PriorityQueue<int[]>> feeds;
     Map<Integer, Set<Integer>> followers;
     Map<Integer, Set<Integer>> followees;
