@@ -1,5 +1,21 @@
 class Solution {
     public int reverse(int x) {
+        int val = Math.abs(x);
+        int rev = 0;
+        while (val>0) {
+            if (Integer.MAX_VALUE/10 < rev) {
+                return 0;
+            }
+            rev *= 10;
+            rev += val%10;
+            val /= 10;
+        }
+        return x<0 ? -rev : rev;
+    }
+}
+
+class Solution {
+    public int reverse(int x) {
         char[] min = String.valueOf(Integer.MIN_VALUE).toCharArray();
         char[] max = String.valueOf(Integer.MAX_VALUE).toCharArray();
         char[] num = String.valueOf(x).toCharArray();
