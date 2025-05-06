@@ -55,3 +55,28 @@ class Solution {
         return out;
     }
 }
+
+// time: O(nlog(n))
+// space: O(n)
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int n : nums) {
+            map.putIfAbsent(n ,0);
+            map.compute(n, (key,val) -> val+1);
+        }
+        int[][] count = new int[map.size()][2];
+        int idx =0;
+        for (Map.Entry<Integer, Integer> e : map.entrySet()) {
+            count[idx][0] = e.getKey();
+            count[idx][1] = e.getValue();
+            idx++;
+        }
+        Arrays.sort(count, (a, b) -> b[1]-a[1]);
+        int[] out = new int[k];
+        for (int i=0; i<k; i++) {
+            out[i] = count[i][0];
+        }
+        return out;
+    }
+}
