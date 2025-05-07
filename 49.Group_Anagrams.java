@@ -1,3 +1,6 @@
+// time: O(n * mlog(m))
+// space: O(n * m)
+// n: number of strings, m: length of the longest string
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> map = new HashMap<>();
