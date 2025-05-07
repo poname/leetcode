@@ -1,3 +1,6 @@
+// 3 pass
+// time: O(n^2)
+// space: O(1)
 class Solution {
     public boolean isValidSudoku(char[][] board) {
         for (int k=0; k<9; k++) {
@@ -32,6 +35,7 @@ class Solution {
     }
 }
 
+// 3 pass
 // time: O(n^2)
 // space: O(1)
 class Solution {
