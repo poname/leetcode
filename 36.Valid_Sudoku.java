@@ -77,3 +77,21 @@ class Solution {
         return true;
     }
 }
+
+// 1 pass
+// time: O(n^2)
+// space: O(n^2)
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        Set<String> seen = new HashSet<>();
+        for (int i=0; i<9; i++) {
+            for (int j=0; j<9; j++) {
+                char m = board[i][j];
+                if(m != '.') {
+                    if(!seen.add(m+"r"+i) || !seen.add(m+"c"+j) || !seen.add(m+"s"+(i/3)+(j/3))) return false;
+                }
+            }
+        }
+        return true;
+    }
+}
