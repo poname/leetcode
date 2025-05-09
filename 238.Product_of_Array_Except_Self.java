@@ -1,3 +1,27 @@
+// time: O(n)
+// space: O(1)
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        // nums: [x, y, z]
+        int n = nums.length;
+        int[] out = new int[n];
+        int preff = 1;
+        for (int i=0; i<n; i++) {
+            out[i] = 1;
+            out[i] *= preff;
+            preff *= nums[i];
+        }
+        // out: [1, x, xy]
+        int suff = 1;
+        for (int i=n-1; i>=0; i--) {
+            out[i] *= suff;
+            suff *= nums[i];
+        }
+        // out: yz, xz, xy
+        return out;
+    }
+}
+
 class Solution {
     public int[] productExceptSelf(int[] nums) {
         int zeros = 0;
