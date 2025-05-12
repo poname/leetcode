@@ -23,6 +23,19 @@ class Solution {
     }
 }
 
+// time: O(n^2)
+// space: O(n)
+class Solution {
+    public boolean isValid(String s) {
+        while(s.contains("()") || s.contains("{}") || s.contains("[]")) {
+            s = s.replace("()", "");
+            s = s.replace("{}", "");
+            s = s.replace("[]", "");
+        }
+        return s.length() == 0;
+    }
+}
+
 class Solution {
     public boolean isValid(String s) {
         if (s.length() % 2 == 1) {
