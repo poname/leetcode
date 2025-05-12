@@ -22,6 +22,22 @@ class Solution {
         return stack.size() == 0;
     }
 }
+// stack optimized
+class Solution {
+    public boolean isValid(String s) {
+        if (s.length()%2 == 1) return false;
+        Stack<Character> stack = new Stack<>();
+        for (char c : s.toCharArray()) {
+            if (c == '(') stack.push(')'); 
+            else if (c == '{') stack.push('}');
+            else if (c == '[') stack.push(']'); 
+            else {
+                if (stack.size()==0 || c!=stack.pop()) return false;
+            }
+        }
+        return stack.size() == 0;
+    }
+}
 
 // time: O(n^2)
 // space: O(n)
