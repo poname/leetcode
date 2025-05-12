@@ -1,3 +1,31 @@
+// array - fastest
+// time: O(n)
+// space: O(n)
+class Solution {
+    public boolean isValid(String s) {
+        int n = s.length();
+        if (n%2 == 1) return false;
+        char[] arr = new char[n/2];
+        int j = 0;
+        for (int i=0; i<n; i++) {
+            char c = s.charAt(i);
+            if (c == '(' || c == '{' || c == '[') {
+                if (j == arr.length) return false; 
+                arr[j++] = c;
+            }
+            else {
+                if (j==0) return false;
+                if ((c == ')' && arr[j-1] != '(') || 
+                    (c == '}' && arr[j-1] != '{') || 
+                    (c == ']' && arr[j-1] != '[')) return false;
+                j--;
+            }
+        }
+        return j==0;
+    }
+}
+
+// stack
 // time: O(n)
 // space: O(n)
 class Solution {
