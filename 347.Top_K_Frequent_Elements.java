@@ -58,6 +58,28 @@ class Solution {
     }
 }
 
+// time: O(nlog(k))
+// space: O(n+k)
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int n : nums) {
+            map.putIfAbsent(n, 0);
+            map.compute(n, (key, val) -> val+1);
+        }
+        Queue<int[]> minH = new PriorityQueue<>((a, b) -> a[1]-b[1]);
+        for (Map.Entry<Integer, Integer> e : map.entrySet()) {
+            minH.add(new int[]{e.getKey(), e.getValue()});
+            if (minH.size() > k) minH.poll(); // this line gurantees the above line to remain log(k) instead of log(n)
+        }
+        int[] out = new int[k];
+        for (int[] e : minH) {
+            out[--k] = e[0];
+        }
+        return out;
+    }
+}
+
 // time: O(nlog(n))
 // space: O(n)
 class Solution {
