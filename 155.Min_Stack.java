@@ -1,3 +1,49 @@
+// true one stack
+// time: O(1)
+// space: O(n)
+class MinStack {
+
+    Stack<Long> stack;
+    long min;
+
+    public MinStack() {
+        stack = new Stack<>();
+        min = 0L;
+    }
+    
+    public void push(int val) {
+        if (stack.empty()) {
+            stack.push(0L);
+            min = val;
+        } else {
+            stack.push((long)val - min);
+            min = Math.min(min, val);
+        }
+    }
+    
+    public void pop() {
+        Long top = stack.pop();
+        if (top < 0) {
+            min = min - top;
+        }
+    }
+    
+    public int top() {
+        if (stack.peek() < 0) {
+            return (int)min;
+        } else {
+            return (int)(stack.peek() + min);
+        }
+    }
+    
+    public int getMin() {
+        return (int)min;
+    }
+}
+
+// one stack
+// time: O(1)
+// space: O(n)
 class MinStack {
     Stack<int[]> stack;
 
@@ -23,6 +69,9 @@ class MinStack {
     }
 }
 
+// two stacks
+// time: O(1)
+// space: O(n)
 class MinStack {
     Stack<Integer> stack, min;
 
