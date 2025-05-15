@@ -1,4 +1,4 @@
-// stack
+// sort + stack
 // time: O(nlog(n))
 // space: O(n)
 class Solution {
@@ -21,7 +21,7 @@ class Solution {
     }
 }
 
-// iteration
+// sort + iteration
 // time: O(nlog(n))
 // space: O(n)
 class Solution {
@@ -43,5 +43,27 @@ class Solution {
             }
         }
         return  fleet;
+    }
+}
+
+// iteration
+// time: O(target)
+// space: O(target)
+class Solution {
+    public int carFleet(int target, int[] position, int[] speed) {
+        int n = position.length;
+        double[] time = new double[target];
+        for (int i=0; i<n; i++) {
+            time[position[i]] = (double)(target-position[i])/(double) speed[i];
+        }
+        int fleet = 0;
+        double prev = 0.0;
+        for (int i=time.length-1; i>=0; i--) {
+            if (time[i] > prev) {
+                fleet++;
+                prev = time[i];
+            }
+        }
+        return fleet;
     }
 }
