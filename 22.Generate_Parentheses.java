@@ -68,3 +68,33 @@ class Solution {
         }
     }
 }
+
+// Brute force
+// time: O(n * 2^(2*n))
+// space: O(n)
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        char[] temp = new char[2*n];
+        List<String> output = new ArrayList<>();
+        rec(0, temp, output);
+        return output;
+    }
+    void rec(int i, char[] temp, List<String> output) {
+        if (i == temp.length) {
+            if (isValid(temp)) output.add(new String(temp));
+            return;
+        }
+        temp[i] = '(';
+        rec(i+1, temp, output);
+        temp[i] = ')';
+        rec(i+1, temp, output);
+    }
+    boolean isValid(char[] input) {
+        int diff = 0;
+        for (char i : input) {
+            diff += (i=='(') ? 1 : -1;
+            if (diff < 0) return false;
+        }
+        return diff==0;
+    }
+}
