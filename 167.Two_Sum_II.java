@@ -15,3 +15,14 @@ class Solution {
         return new int[2];
     }
 }
+
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        int r=numbers.length-1;
+        for (int l=0; l<numbers.length; l++) {
+            while (numbers[l] + numbers[r] > target) r--;
+            if (numbers[l] + numbers[r] == target) return new int[]{l+1, r+1};
+        }
+        return new int[]{0, 0};
+    }
+}
