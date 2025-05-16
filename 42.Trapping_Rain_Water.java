@@ -23,6 +23,24 @@ class Solution {
         return vol;
     }
 }
+class Solution {
+    public int trap(int[] height) {
+        int n = height.length;
+        int[] ltr = new int[n];
+        for (int i = 1; i < n; i++) {
+            ltr[i] = Math.max(ltr[i - 1], height[i - 1]);
+        }
+        int[] rtl = new int[n];
+        for (int i = n - 2; i >= 0; i--) {
+            rtl[i] = Math.max(rtl[i + 1], height[i + 1]);
+        }
+        int vol = 0;
+        for (int i = 0; i < n; i++) {
+            vol += Math.max(0, Math.min(rtl[i], ltr[i]) - height[i]);
+        }
+        return vol;
+    }
+}
 
 class Solution {
     public int trap(int[] height) {
