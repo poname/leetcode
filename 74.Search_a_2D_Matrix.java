@@ -1,4 +1,4 @@
-// iterative
+// iterative - one pass
 // time: O(log(m*n))
 // space: O(1)
 class Solution {
@@ -16,7 +16,9 @@ class Solution {
     }
 }
 
-// recursive
+// recursive - one pass
+// time: O(log(m*n))
+// space: O(1)
 class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
         int m = matrix.length, n = matrix[0].length;
@@ -52,5 +54,33 @@ class Solution {
         } else {
             return true;
         }
+    }
+}
+
+// staircase
+// time: O(m+n)
+// space: O(1)
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int m = matrix.length, n = matrix[0].length;
+        int row = 0, col = n-1;
+        while (col >= 0 && row < m) {
+            if (matrix[row][col] == target) return true;
+            else if (matrix[row][col] > target) col--;
+            else if (matrix[row][col] < target) row++;
+        }
+        return false;
+    }
+}
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int m = matrix.length, n = matrix[0].length;
+        int row = m-1, col = 0;
+        while (col < n && row >= 0) {
+            if (matrix[row][col] == target) return true;
+            else if (matrix[row][col] > target) row--;
+            else if (matrix[row][col] < target) col++;
+        }
+        return false;
     }
 }
