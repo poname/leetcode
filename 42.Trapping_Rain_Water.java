@@ -1,4 +1,4 @@
-// 3 pass
+// preffix and suffix arrays - 3 pass
 // time: O(n)
 // space: O(n)
 class Solution {
