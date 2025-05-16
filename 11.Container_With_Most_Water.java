@@ -1,3 +1,5 @@
+// time: O(n)
+// space: O(1)
 class Solution {
     public int maxArea(int[] height) {
         int l=0;
