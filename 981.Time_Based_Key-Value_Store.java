@@ -16,7 +16,6 @@ class TimeMap {
         if (!map.containsKey(key))
             return "";
         List<Pair> values = map.get(key);
-        System.out.println(values.size());
         int l = 0, r = values.size() - 1;
         String ret = "";
         while (l <= r) {
