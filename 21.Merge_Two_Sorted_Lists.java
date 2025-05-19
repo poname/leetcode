@@ -1,4 +1,4 @@
-// time: O(n)
+// time: O(n+m)
 // space: O(1)
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
