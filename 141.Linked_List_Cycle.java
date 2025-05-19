@@ -42,6 +42,19 @@ public class Solution {
     }
 }
 
+// set
+// time: O(n)
+// space: O(n)
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        Set<ListNode> set = new HashSet<>();
+        while (head != null) {
+            if (!set.add(head)) return true;
+            head = head.next;
+        }
+        return false;
+    }
+}
 public class Solution {
     public boolean hasCycle(ListNode head) {
         Set<ListNode> set = new HashSet<>();
