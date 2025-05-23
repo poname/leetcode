@@ -1,3 +1,15 @@
+class Solution {
+    public int search(int[] nums, int target) {
+        int k = 0;
+        int n = nums.length;
+        for (int b = n / 2; b >= 1; b /= 2) {
+            while (b + k < n && nums[b + k] <= target)
+                k += b;
+        }
+        return nums[k] == target ? k : -1;
+    }
+}
+
 // iterative
 // time: O(logn)
 // space: O(1)
