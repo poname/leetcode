@@ -95,3 +95,22 @@ class Solution {
         return true;
     }
 }
+
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        int[][] rows = new int[9][9];
+        int[][] cols = new int[9][9];
+        int[][] qube = new int[9][9];
+        for (int r = 0; r < 9; r++) {
+            for (int c = 0; c < 9; c++) {
+                if (board[r][c] != '.') {
+                    int m = board[r][c] - '1';
+                    int q = (r / 3) * 3 + (c / 3);
+                    if (rows[r][m]++ > 0 || cols[c][m]++ > 0 || qube[q][m]++ > 0)
+                        return false;
+                }
+            }
+        }
+        return true;
+    }
+}
