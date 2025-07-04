@@ -1,5 +1,20 @@
+// one pass
+// time: O(m + n)
+// space: O(1)
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode ptrA = headA;
+        ListNode ptrB = headB;
+        while (ptrA != ptrB) {
+            ptrA = ptrA != null ? ptrA.next : headB;
+            ptrB = ptrB != null ? ptrB.next : headA;
+        }
+        return ptrA;
+    }
+}
+
 // two pass
-// time: O(n)
+// time: O(m + n)
 // space: O(1)
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
