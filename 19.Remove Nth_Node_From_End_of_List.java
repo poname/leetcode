@@ -1,3 +1,23 @@
+// time: O(n)
+// space: O(1)
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(-1, head);
+        ListNode cur = dummy;
+        while (n > 0) {
+            cur = cur.next;
+            n--;
+        }
+        ListNode pre = dummy;
+        while (cur.next != null) {
+            cur = cur.next;
+            pre = pre.next;
+        }
+        pre.next = pre.next.next;
+        return dummy.next;
+    }
+}
+
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode dummy = new ListNode(0, head);
