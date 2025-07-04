@@ -1,3 +1,30 @@
+// fast/slow pointers
+// time: O(log(n))
+// space: O(1)
+class Solution {
+    public boolean isHappy(int n) {
+        int slow = n;
+        int fast = n;
+        while (fast != 1) {
+            slow = op(slow);
+            fast = op(op(fast));
+            if (fast == slow)
+                break;
+        }
+        return fast==1;
+    }
+
+    int op(int n) {
+        int s = 0;
+        while (n > 0) {
+            int r = n % 10;
+            n /= 10;
+            s += r * r;
+        }
+        return s;
+    }
+}
+
 class Solution {
     public boolean isHappy(int n) {
         int slow = n;
