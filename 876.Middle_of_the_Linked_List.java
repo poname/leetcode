@@ -1,4 +1,4 @@
-// fast/slow pointers
+// one pass - fast/slow pointers
 // time: O(n)
 // space: O(1)
 
@@ -11,5 +11,19 @@ class Solution {
             fast = fast.next.next;
         }
         return slow;
+    }
+}
+
+// two pass
+// time: O(n)
+// space: O(1)
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        int n = 0;
+        for (ListNode node = head; node != null; node = node.next)
+            n++;
+        for (int i = 0; i < n / 2; i++)
+            head = head.next;
+        return head;
     }
 }
