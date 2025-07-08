@@ -16,6 +16,24 @@ class Solution {
         return len;
     }
 }
+// faster window shrinking
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int[] set = new int[128];
+        for (int i = 0; i < 128; i++)
+            set[i] = -1;
+        int len = 0;
+        int l = 0;
+        for (int r = 0; r < s.length(); r++) {
+            if (set[s.charAt(r)] >= l) {
+                l = set[s.charAt(r)] + 1;
+            }
+            set[s.charAt(r)] = r;
+            len = Math.max(len, r - l + 1);
+        }
+        return len;
+    }
+}
 class Solution {
     public int lengthOfLongestSubstring(String s) {
         Set<Character> set = new HashSet<>();
