@@ -1,3 +1,5 @@
+// time: O(n)
+// space: O(1)
 class Solution {
     public int characterReplacement(String s, int k) {
         int[] count = new int[26];
