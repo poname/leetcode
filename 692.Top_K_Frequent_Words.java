@@ -1,6 +1,9 @@
 // min heap
 // time: O(n + nlog(k) + klog(k) + k) -> O(nlog(k))
-// space: O(k + n) -> O(n)
+// space: O(n + k) -> O(n)
+// note: if we consider O(m) for compareTo then:
+// time: O(n + nlog(k)*m + klog(k)*m + k) -> O(mnlog(k))
+// space: O(nm + km) -> O(mn)
 class Solution {
     public List<String> topKFrequent(String[] words, int k) {
         // O(n) memory
