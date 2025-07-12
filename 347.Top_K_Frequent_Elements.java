@@ -80,6 +80,26 @@ class Solution {
     }
 }
 
+// time: O(n + klog(n))
+// space: O(n+k)
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> count = new HashMap<>();
+        for (int n : nums) {
+            count.put(n, count.getOrDefault(n, 0) + 1);
+        }
+
+        Queue<Integer> maxH = new PriorityQueue<>(
+                (a, b) -> count.get(b) - count.get(a));
+        maxH.addAll(count.keySet());
+        int[] out = new int[Math.min(maxH.size(), k)];
+        for (int i = 0; i < out.length; i++) {
+            out[i] = maxH.poll();
+        }
+        return out;
+    }
+}
+
 // time: O(nlog(n))
 // space: O(n)
 class Solution {
