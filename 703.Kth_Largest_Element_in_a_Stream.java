@@ -1,3 +1,6 @@
+// time: O(nlog(k))
+// space: O(k)
+// add is O(log(k)), n adds in the constructor then at most n adds by user
 class KthLargest {
 
     final Queue<Integer> minHeap;
