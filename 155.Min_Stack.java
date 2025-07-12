@@ -1,6 +1,54 @@
 // true one stack
 // time: O(1)
 // space: O(n)
+
+/**
+    scenario 1
+    val, min,    stack, min
+1.  x,   0    -> x,     x
+2.  x+d, x    -> d,     x
+
+    scenario 2
+    val, min,    stack, min
+1.  x,   0    -> x,     x
+2.  x-d, x    -> -d,    x-d
+
+when popping restoring prev_min depends on top
+ */
+
+class MinStack {
+
+    Stack<Long> stack;
+    long min = 0;
+
+    public MinStack() {
+        stack = new Stack<>();
+    }
+
+    public void push(int val) {
+        if (stack.size() == 0) {
+            min = val;
+        }
+        stack.push(val - min);
+        if (val < min)
+            min = val;
+    }
+
+    public void pop() {
+        long top = stack.pop();
+        if (top < 0)
+            min -= top;
+    }
+
+    public int top() {
+        return (int) (min + Math.max(stack.peek(), 0));
+    }
+
+    public int getMin() {
+        return (int) min;
+    }
+}
+
 class MinStack {
 
     Stack<Long> stack;
