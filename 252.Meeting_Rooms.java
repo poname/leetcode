@@ -9,25 +9,17 @@
  * }
  */
 
+// time: O(nlog(n))
+// space: O(n)
 public class Solution {
-    /**
-     * @param intervals: an array of meeting time intervals
-     * @return: if a person could attend all meetings
-     */
     public boolean canAttendMeetings(List<Interval> intervals) {
-        // Write your code here
-        if (intervals == null || intervals.size() == 0) {
-            return true;
-        }
-        Interval[] ivals = intervals.toArray(new Interval[0]);
-        Arrays.sort(ivals, (a, b) -> a.end-b.end); // sort by end values ASC
-        int endSoFar = ivals[0].start; // or Integer.MIN_VALUE;
-        for (Interval iv : ivals) {
-            if (endSoFar <= iv.start) {
-                endSoFar = iv.end;
-            } else {
-                return false; // overlap
+        intervals.sort((a, b) -> a.start - b.start);
+        int prevEnd = 0;
+        for (Interval iv : intervals) {
+            if (iv.start < prevEnd) {
+                return false;
             }
+            prevEnd = iv.end;
         }
         return true;
     }
