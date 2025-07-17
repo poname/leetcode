@@ -1,61 +1,108 @@
-class Trie {
+// time: O(k)
+// space: insert -> O(k) | search -> O(1) | startsWith -> O(1)
+// k: word/prefix length
 
-    TrieNode root;
+// map
+class Trie {
+    Node root;
 
     public Trie() {
-        root = new TrieNode();
+        root = new Node();
     }
-    
+
     public void insert(String word) {
-        TrieNode head = root;
-        for (int i=0; i<word.length(); i++) {
-            char c = word.charAt(i);
-            if (head.children[c-'a'] == null) {
-                head.children[c-'a'] = new TrieNode();
+        Node head = root;
+        for (char c : word.toCharArray()) {
+            if (head.map.get(c) == null) {
+                head.map.put(c, new Node());
             }
-            head = head.children[c-'a'];
+            head = head.map.get(c);
         }
-        head.isWord = true;
+        head.word = true;
     }
-    
+
     public boolean search(String word) {
-        TrieNode head = root;
-        for (int i=0; i<word.length(); i++) {
-            char c = word.charAt(i);
-            head = head.children[c-'a'];
-            if (head == null) {
+        Node head = root;
+        for (char c : word.toCharArray()) {
+            if (head.map.get(c) == null) {
                 return false;
             }
+            head = head.map.get(c);
         }
-        return head.isWord;
+        return head.word;
     }
-    
+
     public boolean startsWith(String prefix) {
-        TrieNode head = root;
-        for (int i=0; i<prefix.length(); i++) {
-            char c = prefix.charAt(i);
-            head = head.children[c-'a'];
-            if (head == null) {
+        Node head = root;
+        for (char c : prefix.toCharArray()) {
+            if (head.map.get(c) == null) {
                 return false;
             }
+            head = head.map.get(c);
         }
         return true;
     }
 }
 
-class TrieNode {
-    TrieNode[] children;
-    boolean isWord;
-    public TrieNode() {
-        children = new TrieNode[26];
-        isWord = false;
+class Node {
+    Map<Character, Node> map;
+    boolean word;
+
+    public Node() {
+        this.map = new HashMap<>();
+        word = false;
     }
 }
 
-/**
- * Your Trie object will be instantiated and called as such:
- * Trie obj = new Trie();
- * obj.insert(word);
- * boolean param_2 = obj.search(word);
- * boolean param_3 = obj.startsWith(prefix);
- */
+// array
+class Trie {
+
+    Node root;
+
+    public Trie() {
+        root = new Node();
+    }
+
+    public void insert(String word) {
+        Node head = root;
+        for (char c : word.toCharArray()) {
+            if (head.children[c - 'a'] == null) {
+                head.children[c - 'a'] = new Node();
+            }
+            head = head.children[c - 'a'];
+        }
+        head.word = true;
+    }
+
+    public boolean search(String word) {
+        Node head = root;
+        for (char c : word.toCharArray()) {
+            if (head.children[c - 'a'] == null) {
+                return false;
+            }
+            head = head.children[c - 'a'];
+        }
+        return head.word;
+    }
+
+    public boolean startsWith(String prefix) {
+        Node head = root;
+        for (char c : prefix.toCharArray()) {
+            if (head.children[c - 'a'] == null) {
+                return false;
+            }
+            head = head.children[c - 'a'];
+        }
+        return true;
+    }
+}
+
+class Node {
+    Node[] children;
+    boolean word;
+
+    public Node() {
+        this.children = new Node[26];
+        word = false;
+    }
+}
