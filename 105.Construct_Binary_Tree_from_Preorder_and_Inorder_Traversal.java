@@ -1,4 +1,29 @@
 class Solution {
+    Map<Integer, Integer> map;
+    int pC = 0;
+
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        map = new HashMap<>();
+        for (int i = 0; i < inorder.length; i++) {
+            map.put(inorder[i], i);
+        }
+        return build(0, inorder.length - 1, preorder);
+    }
+
+    public TreeNode build(int l, int r, int[] preorder) {
+        if (l > r) {
+            return null;
+        }
+        int rootVal = preorder[pC];
+        int mid = map.get(rootVal);
+        pC++;
+        TreeNode left = build(l, mid - 1, preorder);
+        TreeNode right = build(mid + 1, r, preorder);
+        return new TreeNode(rootVal, left, right);
+    }
+}
+
+class Solution {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         return build(0, preorder.length-1, 0, inorder.length-1, preorder, inorder);
     }
