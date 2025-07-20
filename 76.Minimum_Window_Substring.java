@@ -1,3 +1,7 @@
+// time: O(n)
+// space: O(c) ~ O(1)
+
+// optimized map
 class Solution {
     public String minWindow(String s, String t) {
         Map<Character, Integer> need = new HashMap<>();
@@ -39,6 +43,51 @@ class Solution {
     }
 }
 
+// optimized array
+class Solution {
+    public String minWindow(String s, String t) {
+        int[] need = new int[128];
+        int[] have = new int[128];
+        for (char c : t.toCharArray()) {
+            need[c]++;
+        }
+        int needC = 0;
+        for (int n : need) {
+            needC += (n > 0) ? 1 : 0;
+        }
+        int haveC = 0;
+        int l = 0;
+        int len = s.length() + 1;
+        int[] indices = new int[] { -1, -1 };
+        for (int r = 0; r < s.length(); r++) {
+            have[s.charAt(r)]++;
+            if (have[s.charAt(r)] == need[s.charAt(r)]) {
+                haveC++;
+            }
+            if (r - l + 1 < t.length()) {
+                continue;
+            }
+            while (needC == haveC) {
+                if ((r - l + 1) < len) {
+                    len = r - l + 1;
+                    indices = new int[] { l, r };
+                    // optional bonus optimization
+                    if (len == t.length()) {
+                        return s.substring(l, r + 1);
+                    }
+                }
+                if (have[s.charAt(l)] == need[s.charAt(l)]) {
+                    haveC--;
+                }
+                have[s.charAt(l)]--;
+                l++;
+            }
+        }
+        return len <= s.length() ? s.substring(indices[0], indices[1] + 1) : "";
+    }
+}
+
+// map
 class Solution {
     public String minWindow(String s, String t) {
         Map<Character, Integer> need = new HashMap<>();
