@@ -1,14 +1,6 @@
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
-
+// iterative
+// time: O(n)
+// space: O(1)
 class Solution {
     public void reorderList(ListNode head) {
         ListNode slow = head;
@@ -41,6 +33,8 @@ class Solution {
     }
 }
 
+// time: O(n)
+// space: O(n)
 class Solution {
     public void reorderList(ListNode head) {
         List<ListNode> nodes = new ArrayList<>();
