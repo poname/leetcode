@@ -22,28 +22,6 @@ class Solution {
 
 class Solution {
     public int longestConsecutive(int[] nums) {
-        Set<Integer> set = new HashSet<>();
-        for (int n : nums) {
-            set.add(n);
-        }
-        int max = 0;
-        for (int s : set) {
-            if (!set.contains(s-1)) {
-                int count = 1;
-                int head = s;
-                while (set.contains(head+1)) {
-                    count++;
-                    head++;
-                }
-                max = Math.max(count, max);
-            }
-        }
-        return max;
-    }
-}
-
-class Solution {
-    public int longestConsecutive(int[] nums) {
         Map<Integer, Boolean> map = new HashMap<>();
         for (int n : nums) {
             map.put(n, false);
