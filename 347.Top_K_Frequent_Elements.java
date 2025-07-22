@@ -1,3 +1,6 @@
+// time: O(n)
+// space: O(n)
+// bucket sort
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
         Map<Integer, Integer> map = new HashMap<>();
@@ -27,9 +30,7 @@ class Solution {
         return out;
     }
 }
-
-// time: O(n)
-// space: O(n)
+// reverse map
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
         Map<Integer, Integer> map = new HashMap<>();
@@ -100,6 +101,7 @@ class Solution {
     }
 }
 
+// sort
 // time: O(nlog(n))
 // space: O(n)
 class Solution {
