@@ -1,46 +1,48 @@
+// BFS - Queue
+// time: O(n)
+// space: O(n)
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
-        Queue<TreeNode> queue = new LinkedList<> ();
-        if (root != null) {
-            queue.add(root);
-        }
-        
+        List<List<Integer>> out = new ArrayList<>();
+        if (root == null)
+            return out;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
         while (queue.size() > 0) {
+            int size = queue.size();
             List<Integer> level = new ArrayList<>();
-            final int num = queue.size();
-            for (int i=0; i<num; i++) {
-                TreeNode node = queue.remove();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
                 level.add(node.val);
-                if (node.left != null) {
+                if (node.left != null)
                     queue.add(node.left);
-                }
-                if (node.right != null) {
+                if (node.right != null)
                     queue.add(node.right);
-                }
             }
-            res.add(level);
+            if (level.size() > 0)
+                out.add(level);
         }
-
-        return res;
+        return out;
     }
 }
 
+// DFS - recursive
+// time: O(n)
+// space: O(n)
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
-        rec(root, 1, res);
-        return res;
+        List<List<Integer>> out = new ArrayList<>();
+        dfs(root, out, 0);
+        return out;
     }
-    private void rec(TreeNode root, int level, List<List<Integer>> traversal) {
-        if (root == null) {
+
+    void dfs(TreeNode node, List<List<Integer>> out, int depth) {
+        if (node == null)
             return;
-        }
-        if (level > traversal.size()) {
-            traversal.add(new ArrayList<>());
-        }
-        traversal.get(level-1).add(root.val);
-        rec(root.left, level+1, traversal);
-        rec(root.right, level+1, traversal);
+        if (out.size() == depth)
+            out.add(new ArrayList<>());
+        out.get(depth).add(node.val);
+        dfs(node.left, out, depth + 1);
+        dfs(node.right, out, depth + 1);
     }
 }
