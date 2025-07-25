@@ -42,3 +42,40 @@ class Solution {
         return res.toArray(new int[0][2]);
     }
 }
+
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+        List<int[]> merged = new ArrayList<>();
+        int[] prev = intervals[0];
+        for (int[] iv : intervals) {
+            if (iv[0] <= prev[1]) {
+                prev[1] = Math.max(prev[1], iv[1]);
+            } else {
+                merged.add(prev);
+                prev = iv;
+            }
+        }
+        merged.add(prev);
+        return merged.toArray(new int[merged.size()][]);
+    }
+}
+
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+        Queue<int[]> minH = new PriorityQueue<>((a, b) -> a[1] - b[1]);
+        List<int[]> merged = new ArrayList<>();
+        for (int[] iv : intervals) {
+            while (minH.size() > 0 && minH.peek()[1] < iv[0]) {
+                merged.add(minH.poll());
+            }
+            if (minH.size() == 0)
+                minH.add(iv);
+            else
+                minH.peek()[1] = Math.max(iv[1], minH.peek()[1]);
+        }
+        merged.add(minH.poll());
+        return merged.toArray(new int[merged.size()][]);
+    }
+}
