@@ -79,3 +79,46 @@ class Solution {
         return merged.toArray(new int[merged.size()][]);
     }
 }
+
+// sweep line - tree map
+// time: O(nlog(n))
+// space: O(n)
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        Map<Integer, Integer> map = new TreeMap<>();
+        for (int[] iv : intervals) {
+            map.put(iv[0], map.getOrDefault(iv[0], 0) + 1);
+            map.put(iv[1], map.getOrDefault(iv[1], 0) - 1);
+        }
+        List<int[]> merged = new ArrayList<>();
+        int have = 0;
+        int start = -1;
+        for (int point : map.keySet()) {
+            if (have == 0) {
+                start = point; // point is the start of the interval
+            }
+            have += map.get(point);
+            if (have == 0) {
+                merged.add(new int[] { start, point }); // point is the end of the interval
+            }
+        }
+        return merged.toArray(new int[merged.size()][]);
+    }
+}
+// [2, 6] [1, 3] [8, 10]
+// tree map:
+// k  -->  v
+// 1  -->  1
+// 2  -->  1
+// 3  --> -1
+// 6  --> -1
+// 8  -->  1
+// 10 --> -1
+// have += mp.get(k):
+// ..... 1 ..... 2 ..... 3 ..... 6 ..... 8 ..... 10
+// 00000 1 11111 2 22222 1 11111 0 00000 1 11111 0
+//       |----------------------->       |------->
+// | have toggaling from 0 to 1 is the start of an interval
+// - the interval continues while have is greater than 0
+// > have toggling from 1 to 1 is the end of an interval
+ 
