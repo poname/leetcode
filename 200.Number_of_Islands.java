@@ -1,3 +1,48 @@
+// bfs
+// + added to queue, if we keep it 1 when we add it to queue then there is a chance we may add it again or we shouls use a separate visited ds to track
+// . processed
+// time: O(m * n)
+// space: O(m * n)
+class Solution {
+    public int numIslands(char[][] grid) {
+        int islands = 0;
+        int m = grid.length;
+        int n = grid[0].length;
+        Queue<int[]> queue = new LinkedList<>();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == '1') {
+                    islands++;
+                    grid[i][j] = '+';
+                    queue.add(new int[] { i, j });
+                    while (queue.size() > 0) {
+                        int x = queue.peek()[0];
+                        int y = queue.poll()[1];
+                        grid[x][y] = '.';
+                        if (x > 0 && grid[x - 1][y] == '1') {
+                            grid[x - 1][y] = '+';
+                            queue.add(new int[] { x - 1, y });
+                        }
+                        if (y > 0 && grid[x][y - 1] == '1') {
+                            grid[x][y - 1] = '+';
+                            queue.add(new int[] { x, y - 1 });
+                        }
+                        if (x < m - 1 && grid[x + 1][y] == '1') {
+                            grid[x + 1][y] = '+';
+                            queue.add(new int[] { x + 1, y });
+                        }
+                        if (y < n - 1 && grid[x][y + 1] == '1') {
+                            grid[x][y + 1] = '+';
+                            queue.add(new int[] { x, y + 1 });
+                        }
+                    }
+                }
+            }
+        }
+        return islands;
+    }
+}
+
 class Solution {
     public int numIslands(char[][] grid) {
         int rows = grid.length;
